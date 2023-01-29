@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Image, View, Text } from "react-native";
+import { loginUserWithGoogle } from "../../utils/firebaseAuthUtil";
 import EmailLoginButton from "../EmailLoginButton";
 import EmailSignupButton from "../EmailSignupButton";
 import GoogleLoginButton from "../GoogleLoginButton";
@@ -8,6 +9,9 @@ import SignupForm from "../SignupForm";
 const LoginScreen = (props) => {
   const [loginMethod, setLoginMethod] = useState("");
   console.log(loginMethod);
+  const handleGoogleLogin = () => {
+    loginUserWithGoogle();
+  }
   return (
     <View style={styles.container}>
       <Image
@@ -17,7 +21,7 @@ const LoginScreen = (props) => {
       <Text style={styles.headerText}>Welcome !</Text>
       {loginMethod === "" && (
         <View style={styles.methodContainer}>
-          <GoogleLoginButton setLoginMethod={setLoginMethod} />
+          <GoogleLoginButton setLoginMethod={setLoginMethod} login={handleGoogleLogin} />
           <EmailLoginButton setLoginMethod={setLoginMethod} />
           <EmailSignupButton setLoginMethod={setLoginMethod} />
         </View>

@@ -1,18 +1,21 @@
 import { StyleSheet, Text, View, Pressable, Image } from "react-native";
+import { deleteNote } from "../utils/firebaseDataUtil";
 
 export default function Note(props) {
-  const deleteNote = () => {
-    console.log("delete note");
+  const data = props.data.item;
+  const HandleDeleteNote = () => {
+    props.setNotes(props.notes.filter((note) => note.id!=data.id));
+    deleteNote(data.id);
   };
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
-        <Text style={styles.titleStyle}>{props.title}</Text>
-        <Text style={styles.textStyle}>{props.text}</Text>
+        <Text style={styles.titleStyle}>{data.title}</Text>
+        <Text style={styles.textStyle}>{data.text}</Text>
       </View>
       <Pressable
         onPress={() => {
-          deleteNote();
+          HandleDeleteNote();
         }}
       >
         <Image style={styles.icon} source={require("../assets/delete.png")} />
@@ -53,5 +56,6 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     resizeMode: "cover",
+    marginRight:20
   },
 });

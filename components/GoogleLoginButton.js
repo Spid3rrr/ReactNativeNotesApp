@@ -3,7 +3,7 @@ export default function GoogleLoginButton(props) {
   return (
     <Pressable
       onPress={() => {
-        props.setLoginMethod("");
+        props.login();
       }}
       style={styles.googleButton}
     >
